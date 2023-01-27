@@ -36,6 +36,37 @@ string getColor(cardColor cardColor) {
     }
 }
 
+// Overloaded Insertion Operator
+ostream& operator<<(ostream& os, const Card& card) {
+    // Basically just another way to call printDescription()
+
+    // Card description despends on its card type
+    switch(card.m_cardType) {
+        case NumberCards:
+            os << getColor(card.m_cardColor) << " " << card.m_cardNum << " Card";
+            break;
+        case Draw2:
+            os << getColor(card.m_cardColor) << " Draw 2 Card";
+            break;
+        case Reverse:
+            os << getColor(card.m_cardColor) << " Reverse Card";
+            break;
+        case Skip:
+            os << getColor(card.m_cardColor) << " Skip Card";
+            break;
+        case Wild:
+            os << "Wild Card";
+            break;
+        case WildDraw4:
+            os << "Wild Draw 4 Card";
+            break;
+        default:
+            os << "NULL CARD";
+    }
+
+    return os;
+}
+
 // Default constructor (Creates NULL CARD)
 Card::Card() {
     setNullCard();
@@ -205,8 +236,7 @@ int Card::getCardNum() const {
 
 // Prints all private values of the card
 void Card::printDescription() {
-    // First, displays the name of the card
-    // Depends on the combination of cardType, cardColor, and cardNum
+    // Card description despends on its card type
     switch(m_cardType) {
         case NumberCards:
             cout << getColor(m_cardColor) << " " << m_cardNum << " Card" << endl;
@@ -229,8 +259,6 @@ void Card::printDescription() {
         default:
             cout << "NULL CARD" << endl;
     }
-
-    cout << endl;
 }
 
 // Sets a card to a NULL_CARD (a card without any meaningful values)
