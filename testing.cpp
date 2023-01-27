@@ -16,6 +16,8 @@ int main() {
 
     Card c7;                                        // Default Constructor
     Card* c8 = new Card(Yellow, 2);
+    c8->printDescription();
+    cout << *c8 << endl;
     delete c8;                                      // Calling Destructor
     Card c9(c1);                                    // Copy Constructor
     c1.changeValues(NumberCards, Green, 8);
@@ -23,6 +25,7 @@ int main() {
     c10 = c2;                                       // Overloaded Assignment Operator
     c2.changeValues(Reverse, Red, NO_VALUE);
 
+    cout << "STARTING printDescription()" << endl;
     c1.printDescription();
     c2.printDescription();
     c3.printDescription();
@@ -32,6 +35,19 @@ int main() {
     c7.printDescription();
     c9.printDescription();
     c10.printDescription();
+    cout << "ENDING printDescription()" << endl << endl;
+
+    cout << "STARTING PRINTS" << endl;
+    cout << c1 << endl;
+    cout << c2 << endl;
+    cout << c3 << endl;
+    cout << c4 << endl;
+    cout << c5 << endl;
+    cout << c6 << endl;
+    cout << c7 << endl;
+    cout << c9 << endl;
+    cout << c10 << endl;
+    cout << "ENDING PRINTS" << endl;
     
     
     cout << "Looks good!" << endl;

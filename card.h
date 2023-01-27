@@ -23,7 +23,7 @@ string getType(cardType cardType);
 string getColor(cardColor cardColor);
 
 class Card {
-    friend ostream& operator<<(ostream& os, const Card& card);
+    friend ostream& operator<<(ostream& os, const Card& card);      // Overloaded Insertion Operator
     
     public:
         Card();                                                     // Default constructor (Creates NULL CARD)
