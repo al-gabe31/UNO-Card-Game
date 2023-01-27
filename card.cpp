@@ -70,11 +70,13 @@ ostream& operator<<(ostream& os, const Card& card) {
 // Default constructor (Creates NULL CARD)
 Card::Card() {
     setNullCard();
+    cout << "CARD DEFAULT CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
 }
 
 // Universal Constructor for All Cards (parameters must make sense)
 // e.g. Wild cards cannot have a number
 Card::Card(cardType cardType, cardColor cardColor, int cardNum) {
+    cout << "CARD CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     switch(cardType) {
         case NumberCards:
             // Invalid Combinations
@@ -138,6 +140,7 @@ Card::Card(cardType cardType, cardColor cardColor, int cardNum) {
 
 // Constructor for NumberCards
 Card::Card(cardColor cardColor, int cardNum) {
+    cout << "CARD CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     // Invalid Combinations
     // 1. cardColor == NoColor
     // 2. cardNum <= -1
@@ -158,6 +161,7 @@ Card::Card(cardColor cardColor, int cardNum) {
 
 // Constructor for Draw2, Reverse, and Skip
 Card::Card(cardType cardType, cardColor cardColor) {
+    cout << "CARD CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     // Invalid Combinations
     // 1. cardType isn't either Draw2, Reverse, or Skip
     // 2. cardColor == NoColor
@@ -177,6 +181,7 @@ Card::Card(cardType cardType, cardColor cardColor) {
 
 // Constructor for Wild and WildDraw4
 Card::Card(cardType cardType) {
+    cout << "CARD CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     // Invalid Combinations
     // 1. cardType isn't either Wild or WildDraw4
     if(cardType == NumberCards || cardType == Draw2 || cardType == Reverse || cardType == Skip || cardType == NoType) {
@@ -195,11 +200,13 @@ Card::Card(cardType cardType) {
 
 // Destructor
 Card::~Card() {
+    cout << "CARD DESTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     // No deallocation necessary
 }
 
 // Copy Constructor
 Card::Card(const Card &otherCard) {
+    cout << "CARD COPY CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     m_cardType = otherCard.getCardType();
     m_cardColor = otherCard.getCardColor();
     m_cardNum = otherCard.getCardNum();
@@ -207,6 +214,7 @@ Card::Card(const Card &otherCard) {
 
 // Overloaded Assignment Operator
 Card& Card::operator=(const Card& otherCard) {
+    cout << "CARD ASSIGNMENT OPERATOR CALLED" << endl; // DELETE ONCE DONE
     // Checks for self assignment
     if(this == &otherCard) {
         return *this;
@@ -266,6 +274,14 @@ void Card::setNullCard() {
     m_cardType = NoType;
     m_cardColor = NoColor;
     m_cardNum = NO_VALUE;
+}
+
+// Returns true if a card is a NULL CARD (false otherwise)
+bool Card::isNullCard() {
+    if(m_cardType == NoType && m_cardColor == NoColor && m_cardNum == NO_VALUE) {
+        return true;
+    }
+    return false;
 }
 
 // FOR DEBUGGING PURPOSES (DELETE ONCE DONE)

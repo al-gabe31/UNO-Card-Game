@@ -23,7 +23,7 @@ string getType(cardType cardType);
 string getColor(cardColor cardColor);
 
 class Card {
-    friend ostream& operator<<(ostream& os, const Card& card);      // Overloaded Insertion Operator
+    friend ostream& operator<<(ostream& os, const Card& card);      // Overrided Insertion Operator
     
     public:
         Card();                                                     // Default constructor (Creates NULL CARD)
@@ -32,8 +32,8 @@ class Card {
         Card(cardType cardType, cardColor cardColor);               // Constructor for Draw2, Reverse, and Skip
         Card(cardType cardType);                                    // Constructor for Wild and WildDraw4
         ~Card();                                                    // Destructor
-        Card(const Card &otherCard);                                // Copy Constructor
-        Card& operator=(const Card& otherCard);                     // Overloaded Assignment Operator
+        Card(const Card& otherCard);                                // Copy Constructor
+        Card& operator=(const Card& otherCard);                     // Overrided Assignment Operator
         
         
         // Getter Methods
@@ -49,6 +49,8 @@ class Card {
         void printDescription();
         // Sets a card to a NULL CARD (a card without any meaningful values)
         void setNullCard();
+        // Returns true if a card is a NULL CARD (false otherwise)
+        bool isNullCard();
         // FOR DEBUGGING PURPOSES (DELETE ONCE DONE)
         void changeValues(cardType cardType, cardColor cardColor, int cardNum);
     private:
