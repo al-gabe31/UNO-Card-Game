@@ -16,20 +16,22 @@ string getOwner(deckOwner deckOwner) {
 
 // Default Constructor
 Deck::Deck() {
-    cout << "DEFAULT CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
+    cout << "DECK DEFAULT CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
+    m_cards = new vector<Card*>;
     m_deckOwner = NoOwner;
 }
 
 // Constructor
 Deck::Deck(deckOwner deckOwner) : m_deckOwner(deckOwner) {
-    cout << "CONTSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
+    cout << "DECK CONTSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
+    m_cards = new vector<Card*>;
 }
 
 // Destructor
 Deck::~Deck() {
     cout << "DECK DESTRUCTOR CALLED" << endl; // DELETE ONCE DONE
     // Deletes all cards in the deck
-    for(int i = 0; i < m_cards->size(); i++) {
+    for(unsigned int i = 0; i < m_cards->size(); i++) {
         delete (*m_cards)[i];
     }
     m_cards->clear();
@@ -40,6 +42,7 @@ Deck::~Deck() {
 // Copy Constructor
 Deck::Deck(const Deck& otherDeck) : m_deckOwner(otherDeck.getDeckOwner()) {
     cout << "DECK COPY CONSTRUCTOR CALLED" << endl; // DELETE ONCE DONE
+    m_cards = new vector<Card*>;
     // Copies all decks from one to another
     for(Card* card : *(otherDeck.getCards())) {
         Card* newCard = new Card(card->getCardType(), card->getCardColor(), card->getCardNum());
@@ -50,6 +53,7 @@ Deck::Deck(const Deck& otherDeck) : m_deckOwner(otherDeck.getDeckOwner()) {
 // Overrided Assignment Operator
 Deck& Deck::operator=(const Deck& otherDeck) {
     cout << "DECK OVERRIDED ASSIGNMENT OPERATOR CALLED" << endl; // DELETE ONCE DONE
+    m_cards = new vector<Card*>;
     // Checks for self assignment
     if(this == &otherDeck) {
         return *this;
@@ -57,7 +61,7 @@ Deck& Deck::operator=(const Deck& otherDeck) {
 
     // First, deletes all dynamic memory before copying data
     // Deletes all cards in the deck
-    for(int i = 0; i < m_cards->size(); i++) {
+    for(unsigned int i = 0; i < m_cards->size(); i++) {
         delete (*m_cards)[i];
     }
     m_cards->clear();
@@ -89,7 +93,7 @@ deckOwner Deck::getDeckOwner() const {
 // - DrawPile
 void Deck::clear() {
     if(m_deckOwner == DrawPile) {
-        for(int i = 0; i < m_cards->size(); i++) {
+        for(unsigned int i = 0; i < m_cards->size(); i++) {
             delete m_cards->at(i);
         }
         m_cards->clear();
@@ -196,7 +200,7 @@ void Deck::display() {
             cout << "DECK IS EMPTY" << endl;
         } else {
             // Goes through each card in the deck and prints their description
-            for(int i = 0; i < m_cards->size(); i++) {
+            for(unsigned int i = 0; i < m_cards->size(); i++) {
                 cout << "[" << (i + 1) << "] - " << *((*m_cards)[i]) << endl;
             }
         }
@@ -259,7 +263,7 @@ Card* Deck::pick(int index) {
             display();
 
             // The player then has to keep choosing a valid number to use a card from their deck
-            int chosenNum = -1;
+            unsigned int chosenNum = -1;
 
             while(chosenNum < 0 || chosenNum >= m_cards->size()) {
                 cout << "Pick which card to use: ";
@@ -292,7 +296,7 @@ Card* Deck::pick(int index) {
 void Deck::removeNullCards() {
     // Only remove cards if m_cards even has any cards
     if(m_cards->size() > 0) {
-        int index = 0;
+        unsigned int index = 0;
         while(index < m_cards->size()) {
             if((*m_cards)[index]->isNullCard()) {
                 delete (*m_cards)[index];
@@ -302,4 +306,12 @@ void Deck::removeNullCards() {
             }
         }
     }
+}
+
+// FOR DEBUGGING PURPOSES (DELETE ONCE DONE)
+// Creates a copy of the card object
+// Puts a card into the end of  m_cards
+void Deck::put(Card* card) {
+    Card* copy = new Card(*card);
+    m_cards->push_back(copy);
 }
