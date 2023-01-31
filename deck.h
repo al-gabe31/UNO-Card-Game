@@ -82,6 +82,11 @@ class Deck {
         // - Graveyard
         // - Player
         void removeNullCards();
+
+        // FOR DEBUGGING PURPOSES (DELETE ONCE DONE)
+        // Creates a copy of the card object
+        // Puts a card into the end of m_cards
+        void put(Card* card);
     private:
         vector<Card*>* m_cards;
         deckOwner m_deckOwner;
